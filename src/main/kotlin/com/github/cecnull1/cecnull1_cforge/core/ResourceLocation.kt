@@ -8,7 +8,7 @@ data class ResourceLocation(val modId: String, val path: String) {
      * 判断 [ResourceLocation] 是否为空。
      */
     fun isEmpty(): Boolean {
-        return modId.isEmpty() && path.isEmpty()
+        return path.isEmpty()
     }
 
     /**
@@ -17,6 +17,10 @@ data class ResourceLocation(val modId: String, val path: String) {
      */
     override fun toString(): String {
         return "$modId:$path"
+    }
+
+    override fun hashCode(): Int {
+        return 31 * modId.hashCode() + path.hashCode()
     }
 
     companion object {

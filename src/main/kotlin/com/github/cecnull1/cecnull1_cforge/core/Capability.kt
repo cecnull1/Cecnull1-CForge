@@ -29,8 +29,7 @@ object CapabilityCore {
     }
 
     inline fun <reified T: Any> T.initCapability(capabilityMap: ICapabilityMap): ICapability {
-        capabilityMap[this] = createCapability()
-        return capabilityMap[this] ?: createCapability()
+        return capabilityMap[this] ?: createCapability().also { capabilityMap[this] = it }
     }
 
     inline fun <reified T: Any> T.getCapability(capabilityMap: ICapabilityMap): ICapability? {
