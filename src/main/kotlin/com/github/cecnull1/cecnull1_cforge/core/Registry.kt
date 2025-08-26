@@ -142,5 +142,5 @@ object RegistryEvent {
     }
 }
 
-@RequiresOptIn("目前注册表系统思路还没设定好，将来可能会尝试其他方案，甚至破坏性变更方案。\n如果现在使用此系统而不做好准备，将来可能会引发不可预知的问题，请谨慎对待。")
+@RequiresOptIn("应该马上可用了吧，尽管已通过YuanXOS测验，但还是存在不可预知的风险的。")
 annotation class ExperimentalRegistry

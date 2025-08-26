@@ -20,7 +20,7 @@ data class ResourceLocation(val modId: String, val path: String) {
     }
 
     override fun hashCode(): Int {
-        return 31 * modId.hashCode() + path.hashCode()
+        return modId.hashCode() + 31 * path.hashCode()
     }
 
     companion object {
@@ -71,5 +71,17 @@ data class ResourceLocation(val modId: String, val path: String) {
         fun fromStringSafe(string: String): ResourceLocation {
             return fromStringOrNull(string) ?: ResourceLocation("", "")
         }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as ResourceLocation
+
+        if (modId != other.modId) return false
+        if (path != other.path) return false
+
+        return true
     }
 }
