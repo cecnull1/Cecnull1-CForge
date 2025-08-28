@@ -2,9 +2,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.2.10"
     id("fabric-loom") version "1.11-SNAPSHOT"
     id("maven-publish")
+    id("me.champeau.jmh") version "0.7.0"
 }
 
 version = project.property("mod_version") as String
@@ -56,6 +57,15 @@ dependencies {
     modImplementation("net.fabricmc:fabric-language-kotlin:${project.property("kotlin_loader_version")}")
 
     modImplementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_version")}")
+
+    jmh(files("libs/eventbus-6.0.5.jar"))
+    jmh(files("libs/typetools-0.6.3.jar"))
+
+    // ✅ 添加 Log4j 2 核心
+    jmh("org.apache.logging.log4j:log4j-core:2.19.0")
+
+    // ✅ 添加 Log4j API（可选，但建议）
+    jmh("org.apache.logging.log4j:log4j-api:2.19.0")
 }
 
 tasks.processResources {

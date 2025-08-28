@@ -73,24 +73,43 @@ object CForgeEventCore {
         // 获取当前事件类型对应的监听器列表，若为空则提前返回
         val listeners = eventBus[this::class] ?: return
 
-        // 遍历所有监听器
-        for (handler in listeners) {
-            // 如果事件已被取消，则中断后续监听器的执行
-            if (isCanceled && isInterruptibleWhenCanceled) break
+        val length = listeners.size
+        val isInterruptibleWhenCanceled = this.isInterruptibleWhenCanceled
+        val isCancelable = this.isCancelable
 
+        // 遍历所有监听器
+        var x = 0
+        while (x < length) {
             // 执行监听器逻辑（不捕获异常，由调用方处理）
-            handler(this)
+            listeners[x](this)
 
             // 在监听器执行后，检查事件取消的合法性
-            if (isCanceled && !isCancelable) {
+            if (isCanceled) {
                 // 抛出详细异常信息，帮助开发者快速定位问题
-                throw kotlin.UnsupportedOperationException(
+                if (!isCancelable) throw kotlin.UnsupportedOperationException(
                     "不可取消事件 '${this::class.simpleName}' 被监听器取消。" +
                             "请检查以下可能：" +
                             "\n1. 该事件应声明为可取消: override val isCancelable = true" +
                             "\n2. 或监听器中不应设置 isCanceled = true"
-                )
+                ) else if (isInterruptibleWhenCanceled) break
             }
+            x++
+        }
+    }
+
+    /**
+     * 在 [IEventBus] 中广播触发监听器逻辑（不含取消逻辑）
+     *
+     * @param eventBus 事件总线
+     */
+    fun IEvent.easyPost(eventBus: IEventBus) {
+        isCanceled = false
+        val listeners = eventBus[this::class] ?: return
+        val length = listeners.size
+        var x = 0
+        while (x < length) {
+            listeners[x](this)
+            x++
         }
     }
 

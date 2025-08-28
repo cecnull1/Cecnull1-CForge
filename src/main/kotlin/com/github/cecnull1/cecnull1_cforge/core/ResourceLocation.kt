@@ -1,8 +1,10 @@
 package com.github.cecnull1.cecnull1_cforge.core
 
+import kotlinx.serialization.Serializable
 import kotlin.text.isEmpty
 import kotlin.text.split
 
+@Serializable
 data class ResourceLocation(val modId: String, val path: String) {
     /**
      * 判断 [ResourceLocation] 是否为空。
