@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "cecnull1_cforge",
   "description": "",
-  "authors": [],
+  "authors": ["cecnull1"],
   "contact": {},
   "license": "MIT",
   "icon": "assets/cecnull1_cforge/icon.png",
