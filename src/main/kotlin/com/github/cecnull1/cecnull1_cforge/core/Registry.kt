@@ -128,7 +128,7 @@ object RegistryEvent {
      * 将 [IRegistry] 注册到 [IEventBus]
      */
     inline fun <reified T> IRegistry<T>.registerToEventBus(eventBus: IEventBus) {
-        RegistryRegisterEvent(this).post(eventBus)
+        RegistryDoneEvent(this).post(eventBus)
     }
 
     /**
@@ -136,7 +136,7 @@ object RegistryEvent {
      *
      * @param registry 注册表
      */
-    data class RegistryRegisterEvent<T>(val registry: IRegistry<T>) : IEvent {
+    data class RegistryDoneEvent<T>(val registry: IRegistry<T>) : IEvent {
         override val isCancelable: Boolean = false
         override var isCanceled: Boolean = false
     }

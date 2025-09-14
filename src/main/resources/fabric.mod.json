@@ -17,7 +17,7 @@
       "com.github.cecnull1.cecnull1_cforge.client.Cecnull1CForgeClient"
     ],
     "main": [
-      "com.github.cecnull1.cecnull1_cforge.Cecnull1CForge"
+
     ]
   },
   "mixins": [
@@ -29,7 +29,6 @@
   ],
   "depends": {
     "fabricloader": "*",
-    "fabric": "*",
     "minecraft": "*"
   }
 }

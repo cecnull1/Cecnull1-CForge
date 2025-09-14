@@ -35,7 +35,7 @@ open class CForgeBenchmark {
     @Setup
     fun setup() {
 
-        repeat(1) {
+        repeat(5_000) {
             CForgeEventBus.registerFastEvents<CForgeTestEvent> { event ->
                 event.processedCount++
                 if (event.value % 3 == 0) event.isCanceled = true // 用 3 增加不确定性
@@ -43,7 +43,7 @@ open class CForgeBenchmark {
         }
 
 
-        repeat(1) {
+        repeat(5_000) {
             cforgeSafeBus.registerEvents<CForgeTestEvent> { event ->
                 event.processedCount++
                 if (event.value % 3 == 0) event.isCanceled = true
@@ -85,7 +85,7 @@ open class ForgeBenchmark {
 
     @Setup
     fun setup() {
-        repeat(1) {
+        repeat(5_000) {
             forgeBus.addListener<ForgeTestEvent> { event ->
                 event.processedCount++
                 if (event.value % 3 == 0) event.isCanceled = true

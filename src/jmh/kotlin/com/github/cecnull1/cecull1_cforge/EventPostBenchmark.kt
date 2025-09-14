@@ -61,7 +61,7 @@ val FABRIC_TEST_EVENT: Event<FabricEventHandler> = EventFactory.createArrayBacke
 @Fork(1)
 @Warmup(iterations = 3, time = 1)
 @Measurement(iterations = 5, time = 2)
-open class FabricEventBenchmark {
+open class GFabricEventBenchmark {
 
     private lateinit var fabricEvent: Event<FabricEventHandler>
 
@@ -70,7 +70,7 @@ open class FabricEventBenchmark {
         // ✅ 使用 EventFactory 创建事件
         fabricEvent = FABRIC_TEST_EVENT
 
-        repeat(1) { index ->
+        repeat(5_000) { index ->
             fabricEvent.register { event ->
                 event.processedCount++
                 if (event.value % 3 == 0) {
