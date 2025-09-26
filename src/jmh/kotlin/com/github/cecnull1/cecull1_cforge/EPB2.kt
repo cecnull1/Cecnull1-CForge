@@ -5,7 +5,6 @@ import com.github.cecnull1.cecnull1_cforge.core.CForgeEventBus
 import com.github.cecnull1.cecnull1_cforge.core.CForgeEventCore
 import com.github.cecnull1.cecnull1_cforge.core.CForgeEventCore.post
 import com.github.cecnull1.cecnull1_cforge.core.CForgeEventCore.registerEvents
-import com.github.cecnull1.cecnull1_cforge.core.IEvent
 import net.minecraftforge.eventbus.api.BusBuilder
 import net.minecraftforge.eventbus.api.Cancelable
 import net.minecraftforge.eventbus.api.Event
@@ -13,10 +12,6 @@ import org.openjdk.jmh.annotations.*
 import org.openjdk.jmh.infra.Blackhole
 import java.util.concurrent.ThreadLocalRandom
 import java.util.concurrent.TimeUnit
-
-// ==============================
-// 事件类：轻量、可变、非 data class
-// ==============================
 
 // ==============================
 // CForge Benchmark
@@ -35,15 +30,11 @@ open class CForgeBenchmark {
     @Setup
     fun setup() {
 
-        repeat(5_000) {
+        repeat(1_000_000) {
             CForgeEventBus.registerFastEvents<CForgeTestEvent> { event ->
                 event.processedCount++
                 if (event.value % 3 == 0) event.isCanceled = true // 用 3 增加不确定性
             }
-        }
-
-
-        repeat(5_000) {
             cforgeSafeBus.registerEvents<CForgeTestEvent> { event ->
                 event.processedCount++
                 if (event.value % 3 == 0) event.isCanceled = true
@@ -85,7 +76,7 @@ open class ForgeBenchmark {
 
     @Setup
     fun setup() {
-        repeat(5_000) {
+        repeat(1_000_000) {
             forgeBus.addListener<ForgeTestEvent> { event ->
                 event.processedCount++
                 if (event.value % 3 == 0) event.isCanceled = true

@@ -17,7 +17,6 @@
       "com.github.cecnull1.cecnull1_cforge.client.Cecnull1CForgeClient"
     ],
     "main": [
-
     ]
   },
   "mixins": [

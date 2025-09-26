@@ -70,7 +70,7 @@ open class GFabricEventBenchmark {
         // ✅ 使用 EventFactory 创建事件
         fabricEvent = FABRIC_TEST_EVENT
 
-        repeat(5_000) { index ->
+        repeat(0) { index ->
             fabricEvent.register { event ->
                 event.processedCount++
                 if (event.value % 3 == 0) {

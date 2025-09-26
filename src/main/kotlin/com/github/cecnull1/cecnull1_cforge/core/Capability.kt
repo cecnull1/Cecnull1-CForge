@@ -1,13 +1,14 @@
 package com.github.cecnull1.cecnull1_cforge.core
 
+import java.util.WeakHashMap
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentMap
 
-typealias ICapabilityMap = ConcurrentMap<Any, ICapability>
+typealias ICapabilityMap = WeakHashMap<Any, ICapability>
 
 typealias ICapability = ConcurrentMap<ResourceLocation, Any>
 
-@ExperimentalCapability
+@Deprecated("如果不是为数据类型超强灵活性存储，或者是模仿Forge的风格，请移步Component", ReplaceWith("ComponentCore", "com.github.cecnull1.cecnull1_cforge.core.ComponentCore"))
 object CapabilityCore {
     /**
      * 快速创建能力表数据结构
@@ -15,7 +16,7 @@ object CapabilityCore {
      * @return [ICapabilityMap] 能力表数据结构
      */
     fun createCapabilityMap(): ICapabilityMap {
-        return ConcurrentHashMap(16)
+        return WeakHashMap(16)
     }
 
     /**
@@ -113,6 +114,3 @@ object CapabilityCore {
         this.remove(resourceLocation)
     }
 }
-
-@RequiresOptIn("应该马上可用了吧，但是目前并未进行深度测试。")
-annotation class ExperimentalCapability

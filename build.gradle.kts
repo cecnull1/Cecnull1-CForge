@@ -2,8 +2,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "2.2.10"
-    kotlin("plugin.serialization") version "2.2.10"
+    kotlin("jvm") version "2.2.20"
+    kotlin("plugin.serialization") version "2.2.20"
     id("fabric-loom") version "1.11-SNAPSHOT"
     id("maven-publish")
     id("me.champeau.jmh") version "0.7.0"
@@ -67,6 +67,7 @@ dependencies {
 
     // ✅ 添加 Log4j API（可选，但建议）
     jmh("org.apache.logging.log4j:log4j-api:2.19.0")
+    testImplementation(kotlin("test"))
 }
 
 tasks.processResources {
